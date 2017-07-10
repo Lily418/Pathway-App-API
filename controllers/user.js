@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Joi = require('joi');
+const jwt = require('jwt-simple');
 
 const userSchema = Joi.object().keys({
   name: Joi.string().required(),
@@ -16,14 +17,12 @@ router.post('/', (req, res) => {
     return
   }
 
-  const user = req.models.User.build({
+  req.models.User.create({
     "name" : req.body.name,
     dateBeganUsingApp: Date.parse(req.body.dateBeganUsingApp)
   })
-
-  user.save()
-  .then(() => {
-    res.status(200).send()
+  .then((savedUser) => {
+    res.status(200).send({"token" : jwt.encode({"userId" : savedUser.id}, process.env.PATHWAY_JWT_SECRET_KEY)})
   })
   .catch((error) => {
     res.status(500).send({ error: process.env.NODE_ENV === "development" ? error : "Error Creating User"});
