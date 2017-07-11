@@ -6,14 +6,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       required: true
     },
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Symptom.belongsTo(models.DailyCheckin, {
-          "targetKey": "id", "foreignKey": "daily_checkin_id"
-        })
-      }
-    }
   });
   return Symptoms;
 };

@@ -40,6 +40,9 @@ db.MedicationRecord.hasOne(db.Medication, {
   as: "Medication", foreignKey: 'id', targetKey: 'medication_id'
 })
 
+db.Symptom.belongsTo(db.DailyCheckin, {
+  "targetKey": "id", "foreignKey": "daily_checkin_id"
+})
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
