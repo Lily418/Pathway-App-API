@@ -43,7 +43,7 @@ const authenticate = (req, res, next) => {
 app.use("/user", require('./controllers/user'))
 app.use("/medication", authenticate, require('./controllers/medication'))
 app.use("/medication_record", authenticate, require('./controllers/medication_record'))
-
+app.use("/daily_checkin", authenticate, require('./controllers/daily_checkin'))
 
 
 app.listen(3000, function () {

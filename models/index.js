@@ -24,11 +24,22 @@ fs
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(function(modelName) {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+db.DailyCheckin.hasMany(db.Symptom, {
+  "targetKey": "id", "foreignKey": "daily_checkin_id"
+})
+
+db.DailyCheckin.belongsTo(db.User, {
+  as: "User", foreignKey: 'user_id', targetKey: 'id'
+})
+
+db.MedicationRecord.belongsTo(db.User, {
+  as: "User", foreignKey: 'user_id', targetKey: 'id'
+})
+
+db.MedicationRecord.hasOne(db.Medication, {
+  as: "Medication", foreignKey: 'medication_id', targetKey: 'id'
+})
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
