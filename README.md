@@ -32,5 +32,7 @@ When posting to the medication_record endpoint it returns the dates of medicatio
 
 Similarly the daily_checkin endpoint returns the amount of daily checkins made, if this does not match the amount stored in the clients local database the client can GET daily_checkin/checkin_times to find which records are missing from the server.
 
+The response from the GET /medication can be included in the app bundle so medication_records can be created and stored in the local database until the client is next online.
+
 ## Next Steps
 At the moment the api is missing a full authentication system, there should also be more tests around validation / error handling.
