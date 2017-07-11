@@ -37,7 +37,7 @@ db.MedicationRecord.belongsTo(db.User, {
 })
 
 db.MedicationRecord.hasOne(db.Medication, {
-  as: "Medication", foreignKey: 'medication_id', targetKey: 'id'
+  as: "Medication", foreignKey: 'id', targetKey: 'medication_id'
 })
 
 
