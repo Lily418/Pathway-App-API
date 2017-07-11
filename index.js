@@ -22,8 +22,6 @@ const tokenSchema = Joi.object().keys({
 const authenticate = (req, res, next) => {
   const token = jwt.decode(req.header("Authorization").split(" ")[1], process.env.PATHWAY_JWT_SECRET_KEY)
 
-  console.log(token)
-
   const validationError = Joi.validate(token, tokenSchema)
   
   if(validationError.error) {
@@ -49,3 +47,5 @@ app.use("/daily_checkin", authenticate, require('./controllers/daily_checkin'))
 app.listen(3000, function () {
   console.log('App listening on port 3000')
 })
+
+module.exports = app
