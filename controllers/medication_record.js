@@ -26,10 +26,13 @@ router.post('/', (req, res) => {
 
   medicationRecord.save()
   .then(() => {
-    res.status(200).send()
+    return req.models.MedicationRecord.findAll({where: { user_id :  req.user.userId}, raw: true})
+  })
+  .then((medicationRecords) => {
+    res.status(200).send({"medicationRecordsDatesStarted" : medicationRecords.map((medicationRecord) => medicationRecord.dateStarted)})
   })
   .catch((error) => {
-    res.status(500).send({ error: process.env.NODE_ENV === "development" ? error : "Error Creating User"});
+    res.status(500).send({ error: process.env.NODE_ENV === "development" ? error : "Error Creating Medication Record"});
   })
 })
 
