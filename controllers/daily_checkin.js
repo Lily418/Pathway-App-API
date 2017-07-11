@@ -38,4 +38,16 @@ router.post('/', (req, res) => {
   })
 })
 
+//If when creating a daily check in the client notices that the saved daily check ins count is different 
+//from the amount stored locally they can use this endpoint to determine what records are missing
+router.get('/checkin_times', (req, res) => {
+  req.models.DailyCheckin.findAll({where: { user_id :  req.user.userId}, raw: true})
+  .then((dailyCheckins) => {
+    res.status(200).send({"DailyCheckinDates" : dailyCheckins.map((dailyCheckin) => dailyCheckin.date)})
+  })
+  .catch((error) => {
+    res.status(500).send({ error: process.env.NODE_ENV === "development" ? error : "Error Retrieving Checkin Dates"});
+  })
+})
+
 module.exports = router
