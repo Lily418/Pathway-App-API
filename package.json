@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "nodejs index.js",
-    "test": "rm data/database_test.sqlite && sequelize db:migrate --env test  && sequelize db:seed:all --env test && mocha",
+    "test": "rm data/database_test.sqlite || true && sequelize db:migrate --env test  && sequelize db:seed:all --env test && mocha",
     "develop": "nodemon index.js"
   }
 }
