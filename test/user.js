@@ -8,6 +8,8 @@ const should = chai.should()
 const models = require("../models")
 const server = require("../index")
 const jwt = require('jwt-simple')
+const deleteRecords = require('./seeding_helper').deleteRecords
+
 
 
 chai.use(chaiHttp)
@@ -15,10 +17,7 @@ chai.use(chaiDate)
 
 describe("User", () => {
   beforeEach(() => {
-    return models.MedicationRecord.destroy({where: {}})
-          .then(() => {
-            return models.User.destroy({where: {}})
-          })
+    return deleteRecords()
   })
   describe('/POST user', () => {
     it('Should create a new user when given correct input', () => {

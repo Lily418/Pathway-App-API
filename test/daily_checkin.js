@@ -7,13 +7,14 @@ const should = chai.should()
 const models = require("../models")
 const server = require("../index")
 const tokenHelper = require('./token_helper')
+const deleteRecords = require('./seeding_helper').deleteRecords
 
 
 chai.use(chaiHttp)
 
 describe("Daily_Checkin", () => {
   beforeEach(() => {
-                return models.User.destroy({where: {}})
+                return deleteRecords()
                 .then(() => {
                     return models.User.create({
                       "name" : "Russel",

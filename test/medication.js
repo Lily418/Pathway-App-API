@@ -7,13 +7,14 @@ const should = chai.should()
 const models = require("../models")
 const server = require("../index")
 const tokenHelper = require('./token_helper')
+const deleteRecords = require('./seeding_helper').deleteRecords
 
 
 chai.use(chaiHttp)
 
 describe("Medication", () => {
   beforeEach(() => {
-    return models.Medication.destroy({where: {}})
+    return deleteRecords()
                  .then(() => {
                     models.Medication.bulkCreate([
                       { name: "fluoxetine" },
