@@ -22,7 +22,7 @@
     "sqlite3": "^3.1.8"
   },
   "scripts": {
-    "start": "nodejs index.js",
+    "start": "node index.js",
     "setup-dev-database": "rm data/database_development.sqlite || true && node_modules/sequelize-cli/bin/sequelize db:migrate && node_modules/sequelize-cli/bin/sequelize db:seed:all",
     "test": "rm data/database_test.sqlite || true && node_modules/sequelize-cli/bin/sequelize db:migrate --env test  && node_modules/sequelize-cli/bin/sequelize db:seed:all --env test && mocha",
     "develop": "nodemon index.js"
